@@ -1,7 +1,7 @@
 #[allow(dead_code)]
-
 mod adv1;
 mod adv2;
+mod common;
 
 fn main() {
     adv1::run();
