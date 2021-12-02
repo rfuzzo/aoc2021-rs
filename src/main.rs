@@ -4,6 +4,6 @@ mod adv2;
 mod common;
 
 fn main() {
-    adv1::run();
+    //adv1::run();
     adv2::run();
 }

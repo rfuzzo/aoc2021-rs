@@ -1,10 +1,18 @@
+use crate::benchmark;
 use crate::common::read_lines;
 use std::io::{self};
 
 pub fn run() {
     println!("=== adv1 === ");
-    println!("Result1: {}", run_1());
-    println!("Result2: {}", run_2());
+
+    let (r1, rb1) = benchmark!(run_1());
+    let (r2, rb2) = benchmark!(run_2());
+
+    println!("Result1: {}", r1);
+    println!("-> Took: {:?}", rb1);
+
+    println!("Result2: {}", r2);
+    println!("-> Took: {:?}", rb2);
 }
 
 fn run_1() -> i32 {

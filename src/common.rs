@@ -14,4 +14,15 @@ mod common {
         let file = fs::File::open(filename)?;
         Ok(io::BufReader::new(file).lines())
     }
+
+    #[macro_export]
+    macro_rules! benchmark {
+        ($code:expr) => {{
+            let start = std::time::Instant::now();
+            let result = $code;
+            let end = std::time::Instant::now();
+
+            (result, end - start)
+        }};
+    }
 }
