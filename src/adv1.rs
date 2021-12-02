@@ -2,108 +2,58 @@ use std::fs;
 use std::io::{self, BufRead};
 use std::path;
 
-pub fn adv1_run() {
-    adv1_run_1();
-    adv1_run_2();
+pub fn run() {
+    println!("Result1: {}", run_1());
+    println!("Result2: {}", run_2());
 }
 
-fn adv1_run_1() {
+fn run_1() -> i32 {
     println!("=== adv1_run_1 === ");
 
-    let _path = path::Path::new("./src/input.txt");
+    let mut increased = 0;
 
-    if let Ok(lines) = read_lines(_path) {
-        let mut old_depth = 0;
-        let mut increased = 0;
-        let mut decreased = 0;
-        let mut equal = 0;
-        let mut total = 0;
-
-        for line in lines {
-            if let Ok(depth_str) = line {
-                //println!("{}", depth_str);
-                let depth = match depth_str.parse::<i32>() {
+    if let Ok(lines) = read_lines("./src/input.txt") {
+        let a1: Vec<i32> = lines
+            .filter_map(io::Result::ok)
+            .map(|x| {
+                return match x.parse::<i32>() {
                     Err(e) => panic!("Incorrect input: {:?}", e),
                     Ok(n) => n,
                 };
+            })
+            .collect();
 
-                if total == 0 {
-                    total += 1;
-                    continue;
-                }
-
-                if depth > old_depth {
-                    increased = increased + 1;
-                } else if depth < old_depth {
-                    decreased = decreased + 1;
-                } else {
-                    equal += 1;
-                }
-                old_depth = depth;
-                total += 1;
-            }
-        }
-
-        println!("increased: {}", increased);
-        println!("decreased: {}", decreased);
-        println!("equal: {}", equal);
-        println!("total: {}", total);
+        increased = a1
+            .windows(2)
+            .map(|x| x[1] - x[0])
+            .filter(|x| x > &0)
+            .count();
     }
+
+    return increased as i32;
 }
 
-fn adv1_run_2() {
+fn run_2() -> i32 {
     println!("=== adv1_run_2 === ");
 
-    let _path = path::Path::new("./src/input.txt");
+    let mut increased = 0;
 
-    if let Ok(lines) = read_lines(_path) {
-        let mut old_depth = 0;
-        let mut increased = 0;
-        let mut decreased = 0;
-        let mut equal = 0;
-        let mut total = 0;
+    if let Ok(lines) = read_lines("./src/input.txt") {
+        let a1: Vec<i32> = lines
+            .filter_map(io::Result::ok)
+            .map(|x| {
+                return match x.parse::<i32>() {
+                    Err(e) => panic!("Incorrect input: {:?}", e),
+                    Ok(n) => n,
+                };
+            })
+            .collect();
 
-        let x: Vec<String> = lines.filter_map(io::Result::ok).collect();
-        let w = x.windows(3);
-
-        for line in w {
-            let a = match line[0].parse::<i32>() {
-                Err(e) => panic!("Incorrect input: {:?}", e),
-                Ok(n) => n,
-            };
-            let b = match line[1].parse::<i32>() {
-                Err(e) => panic!("Incorrect input: {:?}", e),
-                Ok(n) => n,
-            };
-            let c = match line[2].parse::<i32>() {
-                Err(e) => panic!("Incorrect input: {:?}", e),
-                Ok(n) => n,
-            };
-
-            let depth = a + b + c;
-            //println!("[{},{},{}] > {}", a, b, c, depth);
-
-            if total == 0 {
-                total += 1;
-                continue;
-            }
-
-            if depth > old_depth {
-                increased = increased + 1;
-            } else if depth < old_depth {
-                decreased = decreased + 1;
-            } else {
-                equal += 1;
-            }
-            old_depth = depth;
-            total += 1;
-        }
-
-        println!("increased: {}", increased);
-        println!("decreased: {}", decreased);
-        println!("equal: {}", equal);
-        println!("total: {}", total);
+        let c: Vec<i32> = a1.windows(3).map(|x| x[0] + x[1] + x[2]).collect();
+        increased = c.windows(2).map(|x| x[1] - x[0]).filter(|x| x > &0).count();
     }
+
+    return increased as i32;
 }
 
 // The output is wrapped in a Result to allow matching on errors

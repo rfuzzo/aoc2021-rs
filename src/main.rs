@@ -1,5 +1,8 @@
 mod adv1;
+#[allow(dead_code)]
+mod adv2;
 
 fn main() {
-    adv1::adv1_run();
+    adv1::run();
+    adv2::run();
 }
