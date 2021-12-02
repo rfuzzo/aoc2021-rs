@@ -1,5 +1,6 @@
-mod adv1;
 #[allow(dead_code)]
+
+mod adv1;
 mod adv2;
 
 fn main() {

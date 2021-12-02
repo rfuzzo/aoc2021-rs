@@ -3,13 +3,12 @@ use std::io::{self, BufRead};
 use std::path;
 
 pub fn run() {
+    println!("=== adv1 === ");
     println!("Result1: {}", run_1());
     println!("Result2: {}", run_2());
 }
 
 fn run_1() -> i32 {
-    println!("=== adv1_run_1 === ");
-
     let mut increased = 0;
 
     if let Ok(lines) = read_lines("./src/input.txt") {
@@ -34,8 +33,6 @@ fn run_1() -> i32 {
 }
 
 fn run_2() -> i32 {
-    println!("=== adv1_run_2 === ");
-
     let mut increased = 0;
 
     if let Ok(lines) = read_lines("./src/input.txt") {
