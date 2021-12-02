@@ -10,7 +10,7 @@ pub fn run() {
 fn run_1() -> i32 {
     let mut increased = 0;
 
-    if let Ok(lines) = read_lines("./src/input.txt") {
+    if let Ok(lines) = read_lines("./src/data/input.txt") {
         let a1: Vec<i32> = lines
             .filter_map(io::Result::ok)
             .map(|x| {
@@ -34,7 +34,7 @@ fn run_1() -> i32 {
 fn run_2() -> i32 {
     let mut increased = 0;
 
-    if let Ok(lines) = read_lines("./src/input.txt") {
+    if let Ok(lines) = read_lines("./src/data/input.txt") {
         let a1: Vec<i32> = lines
             .filter_map(io::Result::ok)
             .map(|x| {

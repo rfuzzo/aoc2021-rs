@@ -11,7 +11,7 @@ fn run_1() -> i32 {
     let mut x = 0;
     let mut y = 0;
 
-    if let Ok(lines) = read_lines("./src/input2.txt") {
+    if let Ok(lines) = read_lines("./src/data/input2.txt") {
         let a1 = lines.filter_map(io::Result::ok);
 
         for line in a1 {
@@ -52,7 +52,7 @@ fn run_2() -> i32 {
     let mut x = 0;
     let mut y = 0;
 
-    if let Ok(lines) = read_lines("./src/input2.txt") {
+    if let Ok(lines) = read_lines("./src/data/input2.txt") {
         let a1 = lines.filter_map(io::Result::ok);
 
         for line in a1 {
