@@ -36,7 +36,7 @@ fn run_1() -> i32 {
             .count();
     }
 
-    return increased as i32;
+    increased as i32
 }
 
 fn run_2() -> i32 {
@@ -57,5 +57,5 @@ fn run_2() -> i32 {
         increased = c.windows(2).map(|x| x[1] - x[0]).filter(|x| x > &0).count();
     }
 
-    return increased as i32;
+    increased as i32
 }
