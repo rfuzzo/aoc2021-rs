@@ -8,43 +8,44 @@ pub fn run() {
 }
 
 fn run_1() -> i32 {
-    let mut x = 0;
-    let mut y = 0;
+    if let Ok(input) = read_lines("./src/data/input2.txt") {
+        let lines = input.filter_map(io::Result::ok);
 
-    if let Ok(lines) = read_lines("./src/data/input2.txt") {
-        let a1 = lines.filter_map(io::Result::ok);
+        let (a, b) = lines.fold((0 as i32, 0 as i32), |(accx, accy), l| {
+            let splits = l.split(" ").collect::<Vec<&str>>();
+            let id = splits[0];
+            let val = splits[1];
 
-        for line in a1 {
-            let splits = line.split(" ").collect::<Vec<&str>>();
-
-            if splits[0] == "up" {
-                let up = match splits[1].parse::<i32>() {
+            if id == "up" {
+                let up = match val.parse::<i32>() {
                     Err(e) => panic!("Incorrect input: {:?}", e),
                     Ok(n) => n,
                 };
 
-                y -= up;
-            } else if splits[0] == "down" {
-                let down = match splits[1].parse::<i32>() {
+                return (accx, accy - up);
+            } else if id == "down" {
+                let down = match val.parse::<i32>() {
                     Err(e) => panic!("Incorrect input: {:?}", e),
                     Ok(n) => n,
                 };
 
-                y += down;
-            } else if splits[0] == "forward" {
-                let fwd = match splits[1].parse::<i32>() {
+                return (accx, accy + down);
+            } else if id == "forward" {
+                let fwd = match val.parse::<i32>() {
                     Err(e) => panic!("Incorrect input: {:?}", e),
                     Ok(n) => n,
                 };
 
-                x += fwd;
+                return (accx + fwd, accy);
             } else {
                 panic!("Incorrect input")
             };
-        }
-    }
+        });
 
-    return x * y;
+        return a * b;
+    } else {
+        panic!("Incorrect input")
+    }
 }
 
 fn run_2() -> i32 {
@@ -52,10 +53,10 @@ fn run_2() -> i32 {
     let mut x = 0;
     let mut y = 0;
 
-    if let Ok(lines) = read_lines("./src/data/input2.txt") {
-        let a1 = lines.filter_map(io::Result::ok);
+    if let Ok(input) = read_lines("./src/data/input2.txt") {
+        let lines = input.filter_map(io::Result::ok);
 
-        for line in a1 {
+        for line in lines {
             let splits = line.split(" ").collect::<Vec<&str>>();
             let id = splits[0];
             let val = splits[1];

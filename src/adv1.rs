@@ -10,8 +10,8 @@ pub fn run() {
 fn run_1() -> i32 {
     let mut increased = 0;
 
-    if let Ok(lines) = read_lines("./src/data/input.txt") {
-        let a1: Vec<i32> = lines
+    if let Ok(input) = read_lines("./src/data/input.txt") {
+        let lines: Vec<i32> = input
             .filter_map(io::Result::ok)
             .map(|x| {
                 return match x.parse::<i32>() {
@@ -21,7 +21,7 @@ fn run_1() -> i32 {
             })
             .collect();
 
-        increased = a1
+        increased = lines
             .windows(2)
             .map(|x| x[1] - x[0])
             .filter(|x| x > &0)
@@ -34,8 +34,8 @@ fn run_1() -> i32 {
 fn run_2() -> i32 {
     let mut increased = 0;
 
-    if let Ok(lines) = read_lines("./src/data/input.txt") {
-        let a1: Vec<i32> = lines
+    if let Ok(input) = read_lines("./src/data/input.txt") {
+        let lines: Vec<i32> = input
             .filter_map(io::Result::ok)
             .map(|x| {
                 return match x.parse::<i32>() {
@@ -45,7 +45,7 @@ fn run_2() -> i32 {
             })
             .collect();
 
-        let c: Vec<i32> = a1.windows(3).map(|x| x[0] + x[1] + x[2]).collect();
+        let c: Vec<i32> = lines.windows(3).map(|x| x[0] + x[1] + x[2]).collect();
         increased = c.windows(2).map(|x| x[1] - x[0]).filter(|x| x > &0).count();
     }
 
