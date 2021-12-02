@@ -1,4 +1,5 @@
 pub use common::read_lines;
+pub use common::read_as_vec;
 
 mod common {
     use std::fs;
@@ -13,6 +14,20 @@ mod common {
     {
         let file = fs::File::open(filename)?;
         Ok(io::BufReader::new(file).lines())
+    }
+
+    pub fn read_as_vec<P>(filename: P) -> Vec<String>
+    where
+        P: AsRef<path::Path>,
+    {
+        let lines: Vec<String>;
+        match read_lines(filename) {
+            Err(e) => panic!("Incorrect input {}", e),
+            Ok(input) => {
+                lines = input.filter_map(io::Result::ok).collect();
+            }
+        }
+        lines
     }
 
     #[macro_export]
