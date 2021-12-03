@@ -34,15 +34,22 @@ pub fn run_2(lines: &[String]) -> i32 {
     let (_, x, y) = lines
         .iter()
         .fold((0_i32, 0_i32, 0_i32), |(acca, accx, accy), l| {
-
             let id = l.as_bytes().get(0).unwrap();
             match id {
-                0x75 => (acca - l[3..].parse::<i32>().expect("Incorrect input"), accx, accy),
-                0x64 => (acca + l[5..].parse::<i32>().expect("Incorrect input"), accx, accy),
+                0x75 => (
+                    acca - l[3..].parse::<i32>().expect("Incorrect input"),
+                    accx,
+                    accy,
+                ),
+                0x64 => (
+                    acca + l[5..].parse::<i32>().expect("Incorrect input"),
+                    accx,
+                    accy,
+                ),
                 0x66 => {
                     let fwd = l[8..].parse::<i32>().expect("Incorrect input");
                     (acca, accx + fwd, accy + (acca * fwd))
-                },
+                }
                 _ => panic!("Incorrect input"),
             }
         });
