@@ -1,4 +1,5 @@
 use std::fs;
+use std::io::Read;
 use std::io::{self, BufRead};
 use std::path;
 
@@ -20,6 +21,18 @@ where
         .expect("Incorrect input")
         .filter_map(io::Result::ok)
         .collect()
+}
+
+pub fn get_file_as_byte_vec<P>(filename: P) -> (std::vec::Vec<u8>, usize)
+where
+    P: AsRef<path::Path>,
+{
+    let mut f = fs::File::open(filename).expect("Incorrect input");
+    let mut buffer = Vec::new();
+
+    // read the whole file
+    let total = f.read_to_end(&mut buffer).expect("Incorrect input");
+    (buffer, total)
 }
 
 #[macro_export]
